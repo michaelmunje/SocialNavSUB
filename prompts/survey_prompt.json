@@ -1,0 +1,133 @@
+{
+  "survey_instructions": [
+    "Title: Navigating Through Crowds Survey",
+    "",
+    "This is a research survey about walking through crowds. You will be shown sequences of images of a robot navigating around people. The survey consists of multiple choice questions about the behavior of people and robots in a shared space.",
+    "",
+    "Survey Description & Instructions:",
+    "You will be shown an image representing a video of the scene, where top left is the first frame, the top right is the second frame, the bottom left is the third frame, and the bottom right is the fourth frame.",
+    "",
+    "The video is from the robot's perspective. Some visible people in the video have a unique circled number. The robot is generally moving forward but may turn or change its speed. We will ask you questions about this image."
+   ],
+  "movement_instructions": [
+    "<i>Instructions:</i> This series of questions will ask you about the locations and movements of the robot and people shown in the video.",
+    "",
+    "If you can't see the person at the start of the video, please estimate their starting location based on the first seen location. For the end location, please do the same based on the last seen location."
+  ],
+  "q_robot_moving_direction": {
+    "question": "The robot is _____. (Select all that apply)",
+    "type": "multiple_select",
+    "choices": ["moving ahead", "turning left", "turning right"]
+  },
+  "q_person_spatial_position_begin": {
+    "question": "In the beginning, {PERSON} is _____ the robot.",
+    "type": "multiple_choice",
+    "choices": ["ahead of", "to the left of", "to the right of", "behind"]
+  },
+  "q_person_spatial_position_end": {
+    "question": "At the end, {PERSON} is _____ the robot.",
+    "type": "multiple_choice",
+    "choices": ["ahead of", "to the left of", "to the right of", "behind"]
+  },
+  "q_person_distance_change": {
+    "question": "At the end, {PERSON} ends up _____ the robot compared to the beginning.",
+    "type": "multiple_choice",
+    "choices": ["closer to", "further away from", "about the same distance to"]
+  },
+  "goal_location_instructions": [
+    "Instructions: The goal location is the place where the robot would like to make progress towards, denoted by G.",
+    "",
+    "The following question will ask about the goal and reasoning behind the robot's path to make progress to it.",
+    "",
+    "In this question, the robot's path to the goal refers to the quickest path for a robot to get to the location if there were no people present."
+  ],
+  "q_goal_position_begin": {
+    "question": "In the beginning frame, the goal is ___ of the robot.",
+    "type": "multiple_choice",
+    "choices": ["ahead", "to the left", "to the right"]
+  },
+  "q_goal_position_end": {
+    "question": "At the end frame, the goal is ___ of the robot.",
+    "type": "multiple_choice",
+    "choices": ["ahead", "to the left", "to the right"]
+  },
+  "q_obstructing_path": {
+    "question": "Is {PERSON}'s path in the way of the robot's path to the goal?",
+    "type": "multiple_choice",
+    "choices": ["yes", "no"]
+  },
+  "q_obstructing_end_position": {
+    "question": "At the end frame, is {PERSON}'s position in the way of the robot's path to the goal?",
+    "type": "multiple_choice",
+    "choices": ["yes", "no"]
+  },
+  "navigation_affected_instructions": [
+    "Instructions: The following questions will ask about determining the most likely navigation actions taken by the people and robot.",
+    ""
+  ],
+  "navigation_action_instructions": [
+    "Instructions: The following questions will ask about determining the most likely navigation actions taken by the people and robot.",
+    "",
+    "Here we define navigation actions:",
+    "",
+    "avoiding: Occurs when a person/robot is moving away from the expected path of another person/robot.",
+    "not considering: Occurs when a person/robot is not taking into consideration another person/robot into consideration while navigating towards their goal.",
+    "following: Occurs when a person/robot is moving behind another person/robot.",
+    "overtaking: Occurs when a person/robot alters their path temporarily to get in front of another person/robot, often speeding up temporarily in the process and going back to their original direction in the end.",
+    "yielding to: Occurs when a person/robot reduces their movement to let another person/robot pass.",
+    ""
+  ],
+  "q_robot_affected": {
+    "question": "Is the robot's movement affected by {PERSON}?",
+    "type": "multiple_choice",
+    "choices": ["yes", "no"]
+  },
+  "q_robot_action": {
+    "question": "The robot is most likely ____ {PERSON}.",
+    "type": "multiple_choice",
+    "choices": ["avoiding", "overtaking", "not considering", "following", "yielding to"]
+  },
+  "q_person_affected": {
+    "question": "Is {PERSON}'s movement affected by the robot?",
+    "type": "multiple_choice",
+    "choices": ["yes", "no"]
+  },
+  "q_person_action": {
+    "question": "{PERSON} is most likely ____ the robot.",
+    "type": "multiple_choice",
+    "choices": ["avoiding", "overtaking", "not considering", "following", "yielding to"]
+  },
+  "suggested_future_navigation_affected_instructions": [
+    "Instructions: The following questions will ask about what you think the robot should do next in the scene (after the end of the video) to make progress towards the goal.",
+    ""
+  ],
+  "q_robot_suggested_affected": {
+    "question": "In the future (after the end of the video), should the robot's movement towards the goal be affected by {PERSON}?",
+    "type": "multiple_choice",
+    "choices": ["yes", "no"]
+  },
+  "suggested_future_navigation_action_instructions": [
+    "Instructions: The following questions will ask about what you think the robot should do next in the scene (after the end of the video) to make progress towards the goal.",
+    "",
+    "We again provide definitions for navigation actions:",
+    "",
+    "avoid: Occurs when a person/robot is moving away from the expected path of another person/robot.",
+    "not consider: Occurs when a person/robot is not taking another person/robot into consideration while navigating towards their goal.",
+    "follow: Occurs when a person/robot is moving behind another person/robot.",
+    "overtake: Occurs when a person/robot alters their path temporarily to get in front of another person/robot, often speeding up temporarily in the process and going back to their original direction in the end.",
+    "yield To: Occurs when a person/robot reduces their movement to let another person/robot pass.",
+    ""
+  ],
+  "q_robot_suggested_action": {
+    "question": "In the future (after the end of the video), the robot should ____ {PERSON} as it makes progress towards the goal.",
+    "type": "multiple_choice",
+    "choices": ["avoid", "overtake", "not consider", "follow", "yield to"]
+  },
+  "q_human_future_action_prediction": {
+    "question": "In the future (after the end of the video), {PERSON} will most likely ____ the robot as the robot attempts to make progress towards the goal.",
+    "type": "multiple_choice",
+    "choices": ["avoid", "overtake", "not consider", "follow", "yield to"]
+  },
+  "answers_format_mc": "\nPlease provide the answer to the single question in JSON format (NOT a list) as follows:\n{\"answer\": \"<one of the possible answers>\"}\n\nEnsure the response is in JSON format and includes only one key, \"answer\"",
+  "answers_format_ms": "\nPlease provide the answer in JSON format as follows where you may select one or two possible answers:\n{\"answer\": [\"<answer1>\", \"<answer2>\"]}\n\nEnsure the response is in JSON format and includes only one key, \"answer\""
+}

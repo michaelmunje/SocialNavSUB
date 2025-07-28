@@ -1,0 +1,244 @@
+{
+    "samples": [
+        {
+            "folderpath": "101_Spot_1_155",
+            "n_people": 4
+        },
+        {
+            "folderpath": "101_Spot_1_22",
+            "n_people": 12
+        },
+        {
+            "folderpath": "101_Spot_1_40",
+            "n_people": 10
+        },
+        {
+            "folderpath": "114_Spot_3_507",
+            "n_people": 3
+        },
+        {
+            "folderpath": "123_Spot_0_310",
+            "n_people": 5
+        },
+        {
+            "folderpath": "123_Spot_0_394",
+            "n_people": 6
+        },
+        {
+            "folderpath": "129_Spot_0_149",
+            "n_people": 9
+        },
+        {
+            "folderpath": "129_Spot_1_106",
+            "n_people": 8
+        },
+        {
+            "folderpath": "129_Spot_1_88",
+            "n_people": 11
+        },
+        {
+            "folderpath": "129_Spot_6_21",
+            "n_people": 11
+        },
+        {
+            "folderpath": "129_Spot_7_115",
+            "n_people": 11
+        },
+        {
+            "folderpath": "129_Spot_7_126",
+            "n_people": 8
+        },
+        {
+            "folderpath": "129_Spot_7_157",
+            "n_people": 12
+        },
+        {
+            "folderpath": "129_Spot_7_282",
+            "n_people": 9
+        },
+        {
+            "folderpath": "129_Spot_7_94",
+            "n_people": 13
+        },
+        {
+            "folderpath": "129_Spot_8_224",
+            "n_people": 6
+        },
+        {
+            "folderpath": "33_Spot_45_228",
+            "n_people": 3
+        },
+        {
+            "folderpath": "33_Spot_45_991",
+            "n_people": 3
+        },
+        {
+            "folderpath": "34_Spot_0_1070",
+            "n_people": 9
+        },
+        {
+            "folderpath": "34_Spot_0_1096",
+            "n_people": 6
+        },
+        {
+            "folderpath": "34_Spot_0_1190",
+            "n_people": 6
+        },
+        {
+            "folderpath": "34_Spot_0_1205",
+            "n_people": 11
+        },
+        {
+            "folderpath": "34_Spot_0_177",
+            "n_people": 4
+        },
+        {
+            "folderpath": "34_Spot_0_337",
+            "n_people": 8
+        },
+        {
+            "folderpath": "34_Spot_0_620",
+            "n_people": 7
+        },
+        {
+            "folderpath": "34_Spot_0_634",
+            "n_people": 5
+        },
+        {
+            "folderpath": "34_Spot_0_869",
+            "n_people": 4
+        },
+        {
+            "folderpath": "34_Spot_0_765",
+            "n_people": 10
+        },
+        {
+            "folderpath": "53_Spot_0_128",
+            "n_people": 3
+        },
+        {
+            "folderpath": "34_Spot_0_786",
+            "n_people": 5
+        },
+        {
+            "folderpath": "45_Spot_0_46",
+            "n_people": 1
+        },
+        {
+            "folderpath": "53_Spot_0_185",
+            "n_people": 4
+        },
+        {
+            "folderpath": "53_Spot_0_213",
+            "n_people": 6
+        },
+        {
+            "folderpath": "56_Spot_0_509",
+            "n_people": 7
+        },
+        {
+            "folderpath": "56_Spot_0_549",
+            "n_people": 7
+        },
+        {
+            "folderpath": "56_Spot_0_579",
+            "n_people": 8
+        },
+        {
+            "folderpath": "56_Spot_0_611",
+            "n_people": 8
+        },
+        {
+            "folderpath": "56_Spot_1_389",
+            "n_people": 5
+        },
+        {
+            "folderpath": "56_Spot_0_695",
+            "n_people": 6
+        },
+        {
+            "folderpath": "56_Spot_0_750",
+            "n_people": 4
+        },
+        {
+            "folderpath": "56_Spot_1_367",
+            "n_people": 11
+        },
+        {
+            "folderpath": "64_Spot_0_24",
+            "n_people": 6
+        },
+        {
+            "folderpath": "64_Spot_0_27",
+            "n_people": 8
+        },
+        {
+            "folderpath": "64_Spot_3_21",
+            "n_people": 3
+        },
+        {
+            "folderpath": "64_Spot_4_58",
+            "n_people": 8
+        },
+        {
+            "folderpath": "74_Spot_0_21",
+            "n_people": 6
+        },
+        {
+            "folderpath": "74_Spot_0_25",
+            "n_people": 6
+        },
+        {
+            "folderpath": "68_Spot_1_56",
+            "n_people": 4
+        },
+        {
+            "folderpath": "69_Spot_1_414",
+            "n_people": 1
+        },
+        {
+            "folderpath": "74_Spot_0_103",
+            "n_people": 5
+        },
+        {
+            "folderpath": "74_Spot_2_0",
+            "n_people": 9
+        },
+        {
+            "folderpath": "74_Spot_2_42",
+            "n_people": 7
+        },
+        {
+            "folderpath": "74_Spot_2_50",
+            "n_people": 7
+        },
+        {
+            "folderpath": "74_Spot_3_291",
+            "n_people": 4
+        },
+        {
+            "folderpath": "74_Spot_3_33",
+            "n_people": 7
+        },
+        {
+            "folderpath": "74_Spot_4_151",
+            "n_people": 9
+        },
+        {
+            "folderpath": "74_Spot_4_39",
+            "n_people": 5
+        },
+        {
+            "folderpath": "79_Spot_0_594",
+            "n_people": 3
+        },
+        {
+            "folderpath": "81_Spot_0_1074",
+            "n_people": 5
+        },
+        {
+            "folderpath": "81_Spot_0_585",
+            "n_people": 7
+        }
+    ]
+}

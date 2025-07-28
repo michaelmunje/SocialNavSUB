@@ -1,0 +1,22 @@
+{
+  "survey_instructions" : [],
+  "movement_instructions": [],
+  "q_robot_moving_direction": [],
+  "q_person_spatial_position_begin": [],
+  "q_person_spatial_position_end": ["q_person_spatial_position_begin"],
+  "q_person_distance_change": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end"],
+  "goal_location_instructions": [],
+  "q_goal_position_begin": [],
+  "q_goal_position_end": ["q_robot_moving_direction", "q_goal_position_begin"],
+  "q_obstructing_path": ["q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end"],
+  "q_obstructing_end_position": ["q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path"],
+  "navigation_action_instructions": [],
+  "q_robot_affected": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path"],
+  "q_robot_action": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path", "q_robot_affected"],
+  "q_person_affected": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path"],
+  "q_person_action": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path", "q_person_affected"],
+  "suggested_future_navigation_action_instructions": [],
+  "q_robot_suggested_affected": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path", "q_robot_affected", "q_robot_action"],
+  "q_robot_suggested_action": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path", "q_robot_affected", "q_robot_action", "q_robot_suggested_affected"],
+  "q_human_future_action_prediction": ["q_robot_moving_direction", "q_person_spatial_position_begin", "q_person_spatial_position_end", "q_goal_position_begin", "q_goal_position_end", "q_obstructing_path", "q_person_affected", "q_person_action"]
+}

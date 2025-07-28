@@ -1,0 +1,73 @@
+# baseline_model: "dummy"
+# baseline_model: "LLaVa-video"
+# baseline_model: "gemini-2.5-flash"
+# baseline_model: "LLaVa"
+# baseline_model: "gpt-4o-2024-11-20"
+# baseline_model: "o4-mini"
+# baseline_model: "gpt-4.1-2025-04-14"
+
+baseline_model: "gemini-2.0-flash-exp"
+
+model_to_api_key: {"gpt4o": "OPENAI_API_KEY", "gemini": "GOOGLE_API_KEY"}
+method: "cot"
+survey_folder: human_results_full_study
+dataset_folder: human_dataset
+# contains all prompts
+prompts_folder: prompts
+evaluation_folder: eval_full_study
+full_results_csv: all_models_full_results.csv
+# evaluation_folder: eval_pilot_tuning
+
+prompt_image_fp: grid_with_bev.png # outdated
+
+# possible options for prompt_img_type: "img_with_bev", "img", "bev", "grid", "grid_with_bev"
+prompt_img_type: "img_with_bev"
+include_time_annotations_img: false
+include_time_annotations_bev: false
+
+# hyperparams for image prompt
+circle_rad_annotated_img: 30
+thickness_annotated_img: 5
+font_scale_annotated_img: 1.3
+left_offset_annotated_img: 14
+
+markersize_bev: 20
+fontsize_bev: 15
+arrow_width_bev: 0.1
+fixed_arrow_length_bev: 0.5
+linewidth_bev: 3
+
+debug: false
+
+# Top-level configuration for directories and file paths
+prompts_dir: "prompts"
+survey_prompt: "prompts/survey_prompt.json"
+
+rulebased_baseline:
+  # Image preprocessing
+  blur_ksize: 5
+
+  # HoughCircles parameters
+  hough_dp: 1.2
+  hough_minDist: 20
+  hough_param1: 100
+  hough_param2: 30
+  hough_minRadius: 10
+  hough_maxRadius: 60
+
+  # Tesseract OCR parameters
+  tesseract_psm: 8
+  tesseract_oem: 3
+  tesseract_char_whitelist: "0123456789RG"
+
+  # Number of frames per subfolder
+  num_frames: 10
+
+  # Spatial and distance thresholds
+  spatial_offset_threshold: 0.4
+  distance_change_threshold: 0.3
+  obstruction_distance_threshold: 0.1
+
+  # Robot movement thresholds
+  robot_turn_threshold: 0.3
+  robot_move_threshold: 0.1

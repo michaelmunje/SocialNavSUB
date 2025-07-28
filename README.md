@@ -12,7 +12,7 @@ This repository contains the code and resources for benchmarking VLMs for scene 
 
 2. **Download the Dataset**
 
-    Please download our dataset from [HuggingFace](link) (will add real link later). This dataset contains human labels for the same social navigation scenarios that the VLMs are evaluated in, which allows quantitative evaluation against human data. Please provide place the data in the `human_dataset` folder or make a custom folder and replace the `dataset_folder` entry in the config file.
+    Please download our dataset from [HuggingFace](link) (will add real link later). This dataset contains the prompt data and human labels for the same social navigation scenarios that the VLMs are evaluated in, which allows quantitative evaluation against human data. Please provide place the human data in the `human_dataset` folder or make a custom folder and replace the `dataset_folder` entry in the config file, and add the prompt data in to `prompts/`.
 
 
 3. **Benchmark a VLM**

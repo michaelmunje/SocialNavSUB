@@ -50,7 +50,6 @@ def evaluate_baseline(
     samples_json_fp: str = "prompts/sample_info.json",
     relevant_prev_qs_fp: str = "prompts/relevant_prev_questions.json",
     config: Dict = None,
-    dataset_cfg: str = "dataset_cfg.yaml",
     debug: bool = False,
     resume_folder: str = None,
 ) -> None:
@@ -76,6 +75,8 @@ def evaluate_baseline(
     logger.info("Initializing evaluation: model=%s, method=%s", baseline_model, method)
     model = load_model_class(baseline_model, model_to_api_key)
     assert method in ("independent", "cot", "cot_with_gt"), "Invalid method"
+    
+    dataset_cfg = config['dataset_cfg_fp']
 
     # Load sample definitions
     with open(samples_json_fp, 'r') as fp:
@@ -98,6 +99,8 @@ def evaluate_baseline(
         sample_dirs = [d for d in sample_dirs if os.path.basename(d) not in processed]
         eval_base = resume_folder
     else:
+        if not os.path.exists(evaluation_folder):
+            os.makedirs(evaluation_folder, exist_ok=True)
         existing = [d for d in os.listdir(evaluation_folder)
                     if os.path.isdir(os.path.join(evaluation_folder, d))]
         idx = len(existing) + 1
@@ -248,7 +251,6 @@ def main() -> None:
             cfg['prompts_folder'], 'relevant_prev_questions.json'
         ),
         config=cfg,
-        dataset_cfg=cfg.get('dataset_cfg', 'dataset_cfg.yaml'),
         debug=cfg.get('debug', False),
         resume_folder=args.resume_folder,
     )

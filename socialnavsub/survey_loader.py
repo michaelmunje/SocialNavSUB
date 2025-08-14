@@ -38,18 +38,29 @@ def get_image_prompt(config_filepath: str, sample_filename: str, prompt_config: 
     config = yaml.load(open(config_filepath, "r"), Loader=yaml.FullLoader)
     n_waypoints_ahead = 10
     image_fp = sample_filename
+    # 81_Spot_0/1082.jpg -> 81_Spot_0_1082/1082.jpg
+    image_id = image_fp.split('/')[-1].split('.')[0]
+    image_id = image_fp.split('/')[-2] + '_' + image_id
+    image_fp = os.path.join(image_id, image_fp.split('/')[-1])
+    
+    # make sure image_fp is in the corresponding directory
+    parent_dir = prompt_config['frontview_folder']
+    image_fp = os.path.join(parent_dir, image_fp)
+    
+    sample_id = image_id
 
     # You might need to provide the goal position or modify this part as per your data structure
     # For now, we'll assume a default goal position
-    sample_context_fp = "/u/mmunje/scratch/vlm-sn/vlm-finetuning/evaluation_1/val_sample_context.json"
+    # go into prompts folder and get goal info.json
+    sample_context_fp = os.path.join(prompt_config['data_folder'], 'goal_info.json')
     get_sample_context = json.load(open(sample_context_fp, "r"))
-    goal_imagepath, raw_goal_pos, dataset_cfg_fp = get_sample_context[sample_filename]
+    goal_imagepath, raw_goal_pos = get_sample_context[sample_filename]
     g_x_g_y = raw_goal_pos.replace(' ', '').replace('[', '').replace(']', '').split(',')
     goal_pos = np.array([int(g_x_g_y[0]) / 1000.0, int(g_x_g_y[1]) / 1000.0])
     # convert goal
 
     all_imgs, all_bevs, img_with_time_annotated, bev_with_time_annotated, n_people = get_annotated_and_bev(
-        image_fp, config, goal_pos, n_waypoints_ahead,
+        image_fp, sample_id, prompt_config, goal_pos, n_waypoints_ahead,
         circle_rad=prompt_config['circle_rad_annotated_img'],
         thickness=prompt_config['thickness_annotated_img'],
         font_scale=prompt_config['font_scale_annotated_img'],

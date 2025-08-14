@@ -10,11 +10,14 @@ baseline_model: "gemini-2.0-flash-exp"
 
 model_to_api_key: {"gpt4o": "OPENAI_API_KEY", "gemini": "GOOGLE_API_KEY"}
 method: "cot"
-survey_folder: human_results_full_study
-dataset_folder: human_dataset
+survey_folder: data/human_labels
+dataset_folder: data/human_labels
+data_folder: data
+frontview_folder: data/front_view
+dataset_cfg_fp: data/dataset_cfg.yaml
 # contains all prompts
-prompts_folder: prompts
-evaluation_folder: eval_full_study
+prompts_folder: data/prompts
+evaluation_folder: experiments
 full_results_csv: all_models_full_results.csv
 # evaluation_folder: eval_pilot_tuning
 
@@ -39,9 +42,7 @@ linewidth_bev: 3
 
 debug: false
 
-# Top-level configuration for directories and file paths
-prompts_dir: "prompts"
-survey_prompt: "prompts/survey_prompt.json"
+survey_prompt: "data/survey_prompt.json"
 
 rulebased_baseline:
   # Image preprocessing

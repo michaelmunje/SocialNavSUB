@@ -16,6 +16,7 @@ from typing import Dict, List, Optional, Tuple
 
 # Packages
 import cv2
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import requests
@@ -803,7 +804,7 @@ def get_axis_limits(objs: Dict[str, TrackedObject], robot_waypoints, goal_pos=No
 
     return (x_min, x_max, y_min, y_max)
 
-def get_annotated_and_bev(imagepath, config, goal_pos, n_waypoints_ahead,
+def get_annotated_and_bev(imagepath, sample_id, prompt_config, goal_pos, n_waypoints_ahead,
                                circle_rad=30,
                                 thickness=5,
                                 font_scale=1.3,
@@ -816,7 +817,6 @@ def get_annotated_and_bev(imagepath, config, goal_pos, n_waypoints_ahead,
                                 include_time_annotations_img=False,
                                 include_time_annotations_bev=False):
     # get the image folder
-    localized_objs_dir = config['lart_localized_scene_objects']
     # also get future imgs
     imgs_in_sequence = []
     future_img_fps = []
@@ -831,7 +831,10 @@ def get_annotated_and_bev(imagepath, config, goal_pos, n_waypoints_ahead,
         future_img_fps.append(future_img_fp)
         imgs_in_sequence.append(cv2.imread(future_img_fp))
         
-    localized_info_fp = get_autolabel_base_filepath(imagepath, localized_objs_dir, config) + '_localized_obj_coords.json'
+    # load up dataset config
+    config = load_yaml(prompt_config['dataset_cfg_fp'])
+        
+    localized_info_fp = prompt_config['prompts_folder']  + '/' + sample_id + f'/{sample_id}_localized_obj_coords.json'
     with open(localized_info_fp, 'r') as f:
         localized_info = json.load(f)
             

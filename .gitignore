@@ -3,6 +3,12 @@
 
 prompts
 old_prompts
+data/dataset_cfg.yaml
+data/front_view/
+data/goal_info.json
+data/human_labels/
+data/sample_info.json
+experiments/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

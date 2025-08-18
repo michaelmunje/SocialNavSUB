@@ -7,17 +7,17 @@ This repository contains the code and resources for benchmarking VLMs for scene 
 1. **Install Dependencies**
 
    ```bash
-   pip install -r requirements.txt (will add actual file soon)
+   pip install -r requirements.txt
    ```
 
 2. **Download the Dataset**
 
-    Please download our dataset from [HuggingFace](link) (will add real link later). This dataset contains the prompt data and human labels for the same social navigation scenarios that the VLMs are evaluated in, which allows quantitative evaluation against human data. Please provide place the human data in the `human_dataset` folder or make a custom folder and replace the `dataset_folder` entry in the config file, and add the prompt data in to `prompts/`.
+    Please download our dataset from [HuggingFace](https://huggingface.co/datasets/michaelmunje/SocialNav-SUB). This dataset contains the prompt data and human labels for the same social navigation scenarios that the VLMs are evaluated in, which allows quantitative evaluation against human data. Please provide place the data in the `data` folder or make a custom folder and replace the `dataset_folder` entry in the config file.
 
 
 3. **Benchmark a VLM**
 
-    Make a config file and specify the VLM under the `baseline_model` parameter and parameters for the experiments (such as prompt representation).
+    Make a config file and specify the VLM under the `baseline_model` parameter and parameters for the experiments (such as prompt representation). API models require an environment variable containing an API key (`GOOGLE_API_KEY` or `OPENAI_API_KEY`).
 
    ```bash
    python socialnavsub/evaluate_vlm.py --cfg_path <cfg_path>

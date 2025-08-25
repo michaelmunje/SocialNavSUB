@@ -12,8 +12,10 @@ This repository contains the code and resources for benchmarking VLMs for scene 
 
 2. **Download the Dataset**
 
-    Please download our dataset from [HuggingFace](https://huggingface.co/datasets/michaelmunje/SocialNav-SUB). This dataset contains the prompt data and human labels for the same social navigation scenarios that the VLMs are evaluated in, which allows quantitative evaluation against human data. Please provide place the data in the `data` folder or make a custom folder and replace the `dataset_folder` entry in the config file.
-
+    Please download our dataset from [HuggingFace](https://huggingface.co/datasets/michaelmunje/SocialNav-SUB) by running the `download_dataset.sh` script:
+   ```bash
+   ./download_dataset.sh
+   ```
 
 3. **Benchmark a VLM**
 

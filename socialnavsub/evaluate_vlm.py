@@ -11,6 +11,7 @@ import base64
 import argparse
 import logging
 from typing import Dict
+from time import perf_counter 
 
 import cv2
 import tqdm
@@ -194,10 +195,12 @@ def evaluate_baseline(
                 human_ans = load_human_answer(human_fp, q_key, choices, q_type)
                 ans = human_ans.get_most_common_answer()
             else:
+                t0 = perf_counter()
                 ans_raw = model.generate_text(prompt, images)
+                latency_s = perf_counter() - t0
                 history.extend([
                     {'entity': ['user'], 'response': prompt.split('\n')},
-                    {'entity': ['assistant'], 'response': [ans_raw]}
+                    {'entity': ['assistant'], 'response': [ans_raw], 'latency_sec': latency_s}
                 ])
                 with open(os.path.join(out_dir, 'conversation.json'), 'w') as cfp:
                     json.dump(history, cfp, indent=4)

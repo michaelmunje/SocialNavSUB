@@ -68,8 +68,8 @@ def compute_averages_and_generate_csv(root_dir, survey_folder, entropy_threshold
         print("Processing experiment:", experiment_folder)
         experiment_path = os.path.join(root_dir, experiment_folder)
         answers_affected = {} # person -> answer
-        # Read eval_cfg.yaml inside the experiment folder
-        eval_cfg_path = os.path.join(experiment_path, 'eval_cfg.yaml')
+        # Read config.yaml inside the experiment folder
+        eval_cfg_path = os.path.join(experiment_path, 'config.yaml')
         if os.path.isfile(eval_cfg_path):
             with open(eval_cfg_path, 'r') as file:
                 eval_config = yaml.safe_load(file)
@@ -689,7 +689,7 @@ def compute_averages_and_generate_csv(root_dir, survey_folder, entropy_threshold
 
 
     df_full_results = pd.DataFrame(all_models_full_experiment_results).round(2)
-    df_full_results.to_csv(f"{config['full_results_csv']}", index=False)
+    df_full_results.to_csv(f"{config['postprocessed_results_csv']}", index=False)
 
     # Step 6: Write the results
     write_eval_full_csv(root_dir, all_results)
@@ -711,7 +711,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--cfg_path',
         type=str,
-        default='eval_cfg.yaml',
+        default='config.yaml',
         help='Path to the config file'
     )
     args = parser.parse_args()

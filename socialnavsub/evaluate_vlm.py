@@ -67,7 +67,7 @@ def evaluate_baseline(
         prompts_data: Path to survey_prompt.json.
         samples_json_fp: Path to sample_info.json.
         relevant_prev_qs_fp: Path to relevant_prev_questions.json.
-        config: Additional configuration dict (e.g., from eval_cfg.yaml).
+        config: Additional configuration dict (e.g., from config.yaml).
         dataset_cfg: Path to dataset configuration YAML.
         debug: If True, save debug images.
         resume_folder: If provided, resume from an existing eval folder.
@@ -228,7 +228,7 @@ def main() -> None:
     parser.add_argument(
         '--cfg_path',
         type=str,
-        default='eval_cfg.yaml',
+        default='config.yaml',
         help='Path to the config file'
     )
     args = parser.parse_args()

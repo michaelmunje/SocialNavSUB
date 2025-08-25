@@ -18,7 +18,7 @@ dataset_cfg_fp: data/dataset_cfg.yaml
 # contains all prompts
 prompts_folder: data/prompts
 evaluation_folder: experiments
-full_results_csv: all_models_full_results.csv
+postprocessed_results_csv: postprocessed_results.csv
 # evaluation_folder: eval_pilot_tuning
 
 prompt_image_fp: grid_with_bev.png # outdated

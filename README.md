@@ -30,10 +30,10 @@ This repository contains the code and resources for benchmarking VLMs for scene 
    Results will be saved in the directory specified in the config file under the `evaluation_folder` entry. To postprocess the results, please run:
 
    ```bash
-   python socialnavsub/aggregate_eval_data.py --cfg_path <cfg_path>
+   python socialnavsub/postprocess_results.py --cfg_path <cfg_path>
    ```
 
-   The results will be viewable in the csv whose filepath is specified in the `full_results_csv` entry in the config file.
+   The results will be viewable in the csv whose filepath is specified in the `postprocessed_results_csv` entry in the config file (by default, `postprocessed_results.csv`).
 
 ## Contributing
 

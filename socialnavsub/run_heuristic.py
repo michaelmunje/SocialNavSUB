@@ -13,7 +13,7 @@ def raise_unknown_exception(message):
     """
     raise ValueError(f"Cannot determine answer. Reason: {message}")
 
-def load_config(config_filename="eval_cfg.yaml"):
+def load_config(config_filename="config.yaml"):
     """
     Loads the YAML configuration file.
     """
@@ -419,13 +419,13 @@ def process_subfolder(subfolder_path, survey_data, rb_cfg):
 def main():
     """
     Main script entry:
-      1. Load eval_cfg.yaml.
+      1. Load config.yaml.
       2. Extract the rule-based hyperparameters from the "rulebased_baseline" section.
       3. Load survey_prompt.json (path configurable via the top-level config).
       4. Process each subfolder in the prompts directory.
       5. Write results to a JSON file in each subfolder.
     """
-    config = load_config("eval_cfg.yaml")
+    config = load_config("config.yaml")
     # Extract hyperparameters specific to the rule-based baseline.
     rb_cfg = config.get("rulebased_baseline", {})
 

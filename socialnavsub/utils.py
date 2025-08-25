@@ -354,7 +354,7 @@ def copy_config_files(eval_dir: str,
     """
     Copies configuration and prompt-related files into the evaluation directory.
     """
-    shutil.copy('eval_cfg.yaml', os.path.join(eval_dir, 'eval_cfg.yaml'))
+    shutil.copy('config.yaml', os.path.join(eval_dir, 'config.yaml'))
     shutil.copy(prompts_data, os.path.join(eval_dir, 'prompts.json'))
     shutil.copy(samples_json_fp, os.path.join(eval_dir, 'sample_info.json'))
     shutil.copy(relevant_prev_qs_fp, os.path.join(eval_dir, 'relevant_prev_questions.json'))

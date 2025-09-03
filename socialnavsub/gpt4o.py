@@ -142,9 +142,11 @@ class GPT4o(APIBaseline):
         messages = [{"role": "user", "content": user_block}]
 
         # Append past conversation if available
-        if past_conversations:
-            for role, msg in past_conversations:
-                messages.append({"role": role, "content": [{"type": "text", "text": msg}]})
+        # if past_conversations:
+        #     for role, msg in past_conversations:
+        #         messages.append({"role": role, "content": [{"type": "text", "text": msg}]})
+                
+        # assert past_conversations is None, "Past conversations are not supported for GPT-4o"
 
         payload = {
             "model": self.model_name,

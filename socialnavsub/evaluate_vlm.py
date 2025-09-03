@@ -16,6 +16,11 @@ from time import perf_counter
 import cv2
 import tqdm
 
+import numpy as np
+import shutil
+
+from utils import compute_top_k_accuracy, compute_top_k_human_accuracy, compute_cross_entropy, Answer
+
 from survey_loader import (
     load_survey_questions_independent,
     load_survey_questions_cot,
@@ -177,6 +182,12 @@ def evaluate_baseline(
         human_fp = os.path.join(a_dir, 'common_answers.json')
         metrics = {}
         history = []
+        # --- per-sample accumulators ---
+        question_answers_export = {}
+        question_answers = {}
+        human_question_answers = {}
+        eval_export = {}
+        n_vlm_queries = 1  # single-shot per question
 
         for q_idx, (q_key, prompt, choices, q_type) in enumerate(tqdm.tqdm(prompts)):
             # Determine reasoning group
@@ -193,9 +204,10 @@ def evaluate_baseline(
                 'Spatial reasoning', 'Spatiotemporal reasoning'
             ):
                 human_ans = load_human_answer(human_fp, q_key, choices, q_type)
-                ans = human_ans.get_most_common_answer()
+                clean_answer = human_ans.get_most_common_answer()
             else:
                 t0 = perf_counter()
+                # print logger
                 ans_raw = model.generate_text(prompt, images)
                 latency_s = perf_counter() - t0
                 history.extend([
@@ -205,9 +217,92 @@ def evaluate_baseline(
                 with open(os.path.join(out_dir, 'conversation.json'), 'w') as cfp:
                     json.dump(history, cfp, indent=4)
                 try:
-                    ans = json.loads(ans_raw)['answer']
+                    clean_answer = json.loads(ans_raw)['answer']
                 except Exception:
-                    ans = 'INVALID'
+                    clean_answer = 'INVALID'
+                    
+            # ---- Save / compute metrics & update CoT prompts ----
+            question_answers_export[q_key] = clean_answer
+
+            if n_vlm_queries == 1:
+                # one-hot prediction with prob=1.0 on the chosen answer
+                question_answers[q_key] = Answer(
+                    [clean_answer],
+                    [1.0],
+                    choices,
+                    len(choices),
+                    q_type
+                )
+            else:
+                raise NotImplementedError('Multiple VLM queries not implemented')
+
+            # If using CoT, inject this answer into later prompts and (optionally) the model history
+            if 'cot' in method:
+                for j in range(q_idx + 1, len(prompts)):
+                    fqkey, fprompt, fchoices, fqtype = prompts[j]
+                    answer_dummy_txt = "{QUESTION_KEY_ANSWER}".replace("QUESTION_KEY", q_key)
+                    if isinstance(clean_answer, str):
+                        clean_answer_with_dict = "{\"answer\": " + clean_answer + "}"
+                    else:
+                        clean_answer_with_dict = "{\"answer\": \"" + str(clean_answer) + "\"}"
+                    fprompt = fprompt.replace(answer_dummy_txt, clean_answer_with_dict)
+                    prompts[j] = (fqkey, fprompt, fchoices, fqtype)
+
+                # best-effort: keep conversational state if the model supports it
+                try:
+                    model.add_to_conversation_history(('user', prompt))
+                    model.add_to_conversation_history(('assistant', json.dumps({"answer": clean_answer})))
+                except Exception:
+                    pass
+
+            # Load human distribution for this question
+            human_question_answers[q_key] = load_human_answer(human_fp, q_key, choices, q_type)
+
+            # Metrics
+            top_1_accuracy = compute_top_k_accuracy(question_answers[q_key], human_question_answers[q_key], 1)
+            top_2_accuracy = compute_top_k_accuracy(question_answers[q_key], human_question_answers[q_key], 2)
+            cross_entropy = compute_cross_entropy(question_answers[q_key], human_question_answers[q_key])
+
+            vlm_entropy = -np.sum([p * np.log2(p) for p in question_answers[q_key].answers_probabilities if p > 0])
+            human_entropy = -np.sum([p * np.log2(p) for p in human_question_answers[q_key].answers_probabilities if p > 0])
+
+            top_1_human_accuracy = compute_top_k_human_accuracy(human_question_answers[q_key], 1)
+            top_2_human_accuracy = compute_top_k_human_accuracy(human_question_answers[q_key], 2)
+
+            top_1_random_accuracy = 1 / len(human_question_answers[q_key].choices)
+            top_2_random_accuracy = 2 / len(human_question_answers[q_key].choices)
+
+            # Export structure for this question
+            eval_export[q_key] = {
+                'top_1_accuracy': top_1_accuracy,
+                'top_2_accuracy': top_2_accuracy,
+                'top_1_human_accuracy': top_1_human_accuracy,
+                'top_2_human_accuracy': top_2_human_accuracy,
+                'top_1_random_accuracy': top_1_random_accuracy,
+                'top_2_random_accuracy': top_2_random_accuracy,
+                'cross_entropy': cross_entropy,
+                'vlm_entropy': float(vlm_entropy),
+                'human_entropy': float(human_entropy),
+                'latency_sec': latency_s if 'latency_s' in locals() else None,
+            }
+
+            # Add probability maps (cast keys to str for JSON)
+            eval_export[q_key]['vlm_probabilities'] = {
+                str(k): v for k, v in question_answers[q_key].answer_to_probability.items()
+            }
+            eval_export[q_key]['human_probabilities'] = {
+                str(k): v for k, v in human_question_answers[q_key].answer_to_probability.items()
+            }
+
+            # Persist progress each question
+            with open(os.path.join(out_dir, 'question_answers.json'), 'w') as of:
+                json.dump(question_answers_export, of, indent=4)
+
+            # copy the human common answers once per sample (cheap to overwrite)
+            shutil.copy(human_fp, os.path.join(out_dir, 'human_common_answers.json'))
+
+            with open(os.path.join(out_dir, 'evaluation.json'), 'w') as of:
+                json.dump(eval_export, of, indent=4)
 
         logger.info("Finished sample: %s", sample_id)
 
